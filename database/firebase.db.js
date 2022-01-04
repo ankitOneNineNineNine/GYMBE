@@ -12,5 +12,5 @@ const firebaseConfig = {
 
 const fB = firebase.initializeApp(firebaseConfig);
 
+exports.db = firebase.getDatabase(fB)
 
-module.expoorts = fB;

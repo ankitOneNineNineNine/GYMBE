@@ -1,11 +1,11 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const authRouter = require('./routes/auth.route')
 
-var app = express();
-
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -13,12 +13,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/auth', authRouter)
 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -30,11 +33,11 @@ app.use(function (err, req, res, next) {
 
 });
 
-app.listen(process.env.PORT || 8000, function(err){
-  if(err){
+app.listen(process.env.PORT || 8000, function (err) {
+  if (err) {
     console.log(err)
   }
-  else{
+  else {
     console.log('Server Running')
   }
 })
